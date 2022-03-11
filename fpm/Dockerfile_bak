@@ -1,0 +1,14 @@
+#FROM heptech/testrepo:Inedge_phpfpm_withCron_23Feb19
+
+FROM heptech/testrepo:phpfpm_7130_v5
+
+RUN mkdir -p /var/www/html/vhosts
+
+COPY crontab /etc/cron.d/cool-task
+
+ADD php.ini	/usr/local/etc/php
+
+RUN chmod 0644 /etc/cron.d/cool-task
+
+
+RUN service cron restart
